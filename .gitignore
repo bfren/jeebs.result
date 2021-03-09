@@ -1,0 +1,15 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+**/.DS_Store
+**/.fake
+**/.ionide
+**/.vs
+**/bin
+**/obj
+
+**/jeebsconfig-secrets*
+
+/Local.pack.props
+/Local.push.props

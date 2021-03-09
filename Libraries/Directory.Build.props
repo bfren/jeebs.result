@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+	
+	<!-- Standard Configuration -->
+	<PropertyGroup Label="Framework and Language">
+		<TargetFramework>net5.0</TargetFramework>
+		<LangVersion>latest</LangVersion>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+	
+	<!-- Enable Internal Testing -->
+	<ItemGroup Label="Test Internals">
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+			<_Parameter1>Tests.$(AssemblyName)</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
+	
+	<!-- Import Licence file -->
+	<ItemGroup Label="Licence">
+		<None Include="../../LICENSE" Pack="true" PackagePath=""/>
+	</ItemGroup>
+	
+	<!-- Get paths to Version and Local.pack.props -->
+	<PropertyGroup>
+		<VersionFile>Version</VersionFile>
+		<VersionPath>$([MSBuild]::GetPathOfFileAbove('$(VersionFile)', '$(MSBuildThisFileDirectory)../'))</VersionPath>
+	</PropertyGroup>
+	
+	<!-- Get Version -->
+	<PropertyGroup>
+		<JeebsVersion>$([System.IO.File]::ReadAllText('$(VersionPath)'))</JeebsVersion>
+	</PropertyGroup>
+	
+	<!-- Package Configuration -->
+	<PropertyGroup Label="Package">
+		<Authors>Ben Green</Authors>
+		<Company>bcg|design</Company>
+		<Copyright>Copyright © bcg 2013-$([System.DateTime]::Now.ToString(yyyy))</Copyright>
+		<Version>$(JeebsVersion)</Version>
+		<Description>$(MSBuildProjectName) library</Description>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<RepositoryUrl>https://github.com/bencgreen/jeebs.result</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+	</PropertyGroup>
+	
+	<!-- Documentation -->
+	<PropertyGroup Label="Documentation" Condition="'$(Configuration)'=='Release'">
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	</PropertyGroup>
+
+</Project>
